@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.route("/apply/:id").get( applyJob);
 router.route("/get").get( getAppliedJobs);
-router.route("/:id/applicants").get, getApplicants);
+router.route("/:id/applicants").get(getApplicants);
 router.route("/status/:id/update").post( updateStatus);
  
 
