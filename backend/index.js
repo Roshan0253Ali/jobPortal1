@@ -20,8 +20,23 @@ app.use(cookieParser());
 //     origin:'http://localhost:5173',
 //     credentials:true
 // }
+const allowedOrigins = [
+    "http://localhost:5173",
+    "http://localhost:5174", 
+    "https://your-deployed-frontend.com" // Add deployed frontend URL
+];
 
-app.use(cors());
+const corsOptions = {
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error("Not allowed by CORS"));
+        }
+    },
+    credentials: true, // Allow cookies
+};
+app.use(cors(corsOptions));
 
 const PORT = process.env.PORT || 3000;
 
